@@ -184,47 +184,47 @@ VSCode 是一个轻量级的编辑器，支持多种语言的编写，包括 LaT
 
 ```json
 "latex-workshop.latex.recipes": [
-        {
-            "name": "XeLaTeX",
-            "tools": [
-                "xelatexmk"
-            ]
-        },
-        {
-            "name": "PdfLaTeX",
-            "tools": [
-                "pdflatexmk"
-            ]
-        }
-    ],
-    "latex-workshop.latex.tools": [
-        {
-            "args": [
-                "-synctex=1",
-                "-pdfxe",
-                "-interaction=nonstopmode",
-                "-file-line-error",
-                "-outdir=%OUTDIR%",
-                "%DOC%"
-            ],
-            "command": "latexmk",
-            "env": {},
-            "name": "xelatexmk"
-        },
-        {
-            "args": [
-                "-synctex=1",
-                "-pdf",
-                "-interaction=nonstopmode",
-                "-file-line-error",
-                "-outdir=%OUTDIR%",
-                "%DOC%"
-            ],
-            "command": "latexmk",
-            "env": {},
-            "name": "pdflatexmk"
-        }
-    ],
+    {
+        "name": "XeLaTeX",
+        "tools": [
+            "xelatexmk"
+        ]
+    },
+    {
+        "name": "PdfLaTeX",
+        "tools": [
+            "pdflatexmk"
+        ]
+    }
+],
+"latex-workshop.latex.tools": [
+    {
+        "args": [
+            "-synctex=1",
+            "-pdfxe",
+            "-interaction=nonstopmode",
+            "-file-line-error",
+            "-outdir=%OUTDIR%",
+            "%DOC%"
+        ],
+        "command": "latexmk",
+        "env": {},
+        "name": "xelatexmk"
+    },
+    {
+        "args": [
+            "-synctex=1",
+            "-pdf",
+            "-interaction=nonstopmode",
+            "-file-line-error",
+            "-outdir=%OUTDIR%",
+            "%DOC%"
+        ],
+        "command": "latexmk",
+        "env": {},
+        "name": "pdflatexmk"
+    }
+],
 ```
 
 ## 进阶配置
