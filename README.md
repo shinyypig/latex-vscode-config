@@ -1,10 +1,12 @@
-# 在VSCode中配置LaTeX环境
+# 在 VSCode 中配置 LaTeX 环境
 
-本教程将介绍如何在VSCode中配置LaTeX环境，以便于在VSCode中进行LaTeX的编写和预览，打造一个舒适便捷的LaTeX编写环境。
+本教程将介绍如何在VSCode中配置LaTeX环境，以便于在VSCode中进行LaTeX的编写和预览，打造一个舒适便捷的LaTeX编写环境。完整配置后的效果如下：
+
+![Alt text](img/iShot_2023-02-13_12.02.01.gif)
 
 主要包含以下内容：
 
-- [在VSCode中配置LaTeX环境](#在vscode中配置latex环境)
+- [在 VSCode 中配置 LaTeX 环境](#在-vscode-中配置-latex-环境)
   - [软件安装](#软件安装)
     - [TeX Live 安装](#tex-live-安装)
     - [VSCode 安装](#vscode-安装)
@@ -57,6 +59,12 @@ VSCode 是一个轻量级的编辑器，支持多种语言的编写，包括 LaT
     English Word Hint 是一个英语单词提示插件，可以在编写英语文档时，自动提示相关英语单词，并显示对应的中文翻译，提高英文文档编写效率。
 
     ![English word hint](img/iShot_2023-02-13_10.24.58.png)
+
+- Path Auto Complete
+
+    Path Auto Complete 可以自动补全路径，方便快速插入图片。
+
+    ![Alt text](img/iShot_2023-02-13_11.57.52.png)
 
 - indent rainbow
 
