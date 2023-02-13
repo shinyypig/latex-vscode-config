@@ -130,11 +130,11 @@ VSCode 是一个轻量级的编辑器，支持多种语言的编写，包括 LaT
 配置项的具体解释如下：
 
 ```json
-// 鼠标悬停，预览公式时，支持 boldsymbol 宏
+%% 鼠标悬停，预览公式时，支持 boldsymbol 宏
 "latex-workshop.hover.preview.mathjax.extensions": [
     "boldsymbol"
 ],
-// 是否启用 IntelliSense，自动补全引用的包中的环境和命令
+%% 是否启用 IntelliSense，自动补全引用的包中的环境和命令
 "latex-workshop.intellisense.package.enabled": true,
 // 编译后的文件输出目录
 "latex-workshop.latex.outDir": "./tmp",
