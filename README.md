@@ -2,7 +2,7 @@
 
 本教程将介绍如何在VSCode中配置LaTeX环境，以便于在VSCode中进行LaTeX的编写和预览，打造一个舒适便捷的LaTeX编写环境。完整配置后的效果如下：
 
-![Alt text](img/iShot_2023-02-13_12.02.01.gif)
+![Alt text](img/iShot_2023-02-13_12.26.45.gif)
 
 主要包含以下内容：
 
