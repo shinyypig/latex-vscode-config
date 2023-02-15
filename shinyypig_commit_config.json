@@ -8,7 +8,7 @@
         "Message footer"
     ],
     "dynamicTemplate": [
-        "{type}{scope}: {description}",
+        "{type}{scope} {description}",
         "",
         "{body}",
         "",
