@@ -248,7 +248,6 @@ VSCode 是一个轻量级的编辑器，支持多种语言的编写，包括 LaT
 
 该配置的主要目的是将 latexindent.pl 的输出信息输出到 tmp/indent.log 文件中，方便统一管理。
 
-
 ### 使用 HyperSnips for Math 插件快速输入公式
 
 首先安装 HyperSnips for Math， 然后根据插件说明进行基本配置。
