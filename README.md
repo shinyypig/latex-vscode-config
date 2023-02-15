@@ -15,7 +15,6 @@
 - 实时预览公式、图片
 - 自动格式化tex文件
 
-
 完整配置后的效果如下：
 
 ![Alt text](img/iShot_2023-02-13_12.26.45.gif)
@@ -35,6 +34,7 @@
   - [进阶配置](#进阶配置)
     - [使用 latexindent 格式化 LaTeX 代码](#使用-latexindent-格式化-latex-代码)
     - [使用 HyperSnips for Math 插件快速输入公式](#使用-hypersnips-for-math-插件快速输入公式)
+    - [使用 Git 进行版本管理](#使用-git-进行版本管理)
 
 ## 软件安装
 
@@ -303,3 +303,25 @@ VSCode 是一个轻量级的编辑器，支持多种语言的编写，包括 LaT
 ```
 
 其余配置可以根据自己的需求进行修改。
+
+### 使用 Git 进行版本管理
+
+首先需要安装 Git：点击 VSCode 左侧的 Source Control (源代码管理) 图标，如果没有安装 Git，会提示安装，根据提示安装即可。
+
+![Alt text](img/iShot_2023-02-15_16.45.42.png)
+
+推荐安装的插件有：
+
+- GitLens
+
+    GitLens 拓展了 VSCode 的源代码管理功能，可以查看每一行代码的提交记录，以及每一次提交的详细信息。但是需要 pro 会员才能解锁全部功能，建议直接在设置中关闭 pro 功能。相关功能，安装下方开源免费插件替代即可。
+
+- Git Graph
+
+    Git Graph 可以以图形化的方式展示 Git 仓库的提交记录，方便查看。
+
+- Commit Message Editor
+
+    Commit Message Editor 可以格式化 commit 信息。可以导入该[配置](shinyypig_commit_config.json)，方便统一管理，效果如下。
+
+![Alt text](img/iShot_2023-02-15_16.54.32.png)

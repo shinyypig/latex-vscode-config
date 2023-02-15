@@ -1,0 +1,132 @@
+{
+    "configVersion": "1",
+    "staticTemplate": [
+        "feat: Short description",
+        "",
+        "Message body",
+        "",
+        "Message footer"
+    ],
+    "dynamicTemplate": [
+        "{type}{scope}: {description}",
+        "",
+        "{body}",
+        "",
+        "{breaking_change}{footer}"
+    ],
+    "tokens": [
+        {
+            "label": "Type",
+            "name": "type",
+            "type": "enum",
+            "combobox": true,
+            "options": [
+                {
+                    "label": "✨ 新功能或文本",
+                    "value": "✨",
+                    "description": "新增功能或文本"
+                },
+                {
+                    "label": "🩹 修复简单错误",
+                    "value": "🩹",
+                    "description": "简单修复非关键性问题"
+                },
+                {
+                    "label": "🐛 修复关键错误",
+                    "value": "🐛",
+                    "description": "修复关键错误"
+                },
+                {
+                    "label": "💥 引入重大改变",
+                    "value": "💥",
+                    "description": "引入重大改变"
+                },
+                {
+                    "label": "🎉 初次提交",
+                    "value": "🎉",
+                    "description": "初次提交"
+                },
+                {
+                    "label": "🔥 删除",
+                    "value": "🔥",
+                    "description": "删除代码或文件"
+                },
+                {
+                    "label": "📦 编译",
+                    "value": "📦",
+                    "description": "新增或更新已编译的文件或包"
+                },
+                {
+                    "label": "➖ 移除依赖",
+                    "value": "➖",
+                    "description": "移除依赖"
+                },
+                {
+                    "label": "➕ 添加依赖",
+                    "value": "➕",
+                    "description": "添加依赖"
+                },
+                {
+                    "label": "🔀 合并分支",
+                    "value": "🔀",
+                    "description": "合并分支"
+                },
+                {
+                    "label": "⏪ 还原",
+                    "value": "⏪",
+                    "description": "还原修改"
+                },
+                {
+                    "label": "🗑 清理",
+                    "value": "🗑",
+                    "description": "清理废弃代码或文本"
+                },
+                {
+                    "label": "👥 新增或更新贡献者",
+                    "value": "👥",
+                    "description": "新增或更新贡献者"
+                }
+            ],
+            "description": "Type of changes"
+        },
+        {
+            "label": "Scope",
+            "name": "scope",
+            "description": "A scope may be provided to a commit’s type, to provide additional contextual information and is contained within parenthesis, e.g., \"feat(parser): add ability to parse arrays\".",
+            "type": "text",
+            "multiline": false,
+            "prefix": "(",
+            "suffix": ")"
+        },
+        {
+            "label": "Short description",
+            "name": "description",
+            "description": "Short description in the subject line.",
+            "type": "text",
+            "multiline": false
+        },
+        {
+            "label": "Body",
+            "name": "body",
+            "description": "Optional body",
+            "type": "text",
+            "multiline": true,
+            "lines": 5,
+            "maxLines": 10
+        },
+        {
+            "label": "Breaking change",
+            "name": "breaking_change",
+            "type": "boolean",
+            "value": "BREAKING CHANGE: ",
+            "default": false
+        },
+        {
+            "label": "Footer",
+            "name": "footer",
+            "description": "Optional footer",
+            "type": "text",
+            "multiline": true
+        }
+    ]
+}
