@@ -27,6 +27,11 @@
                     "description": "新增功能或文本"
                 },
                 {
+                    "label": "📝 添加说明文档",
+                    "value": "📝",
+                    "description": "添加说明文档"
+                },
+                {
                     "label": "🩹 修复简单错误",
                     "value": "🩹",
                     "description": "简单修复非关键性问题"
