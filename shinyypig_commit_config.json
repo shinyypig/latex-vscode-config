@@ -1,18 +1,15 @@
 {
+    "$schema": "https://bendera.github.io/vscode-commit-message-editor/schemas/config-v1.schema.json",
     "configVersion": "1",
     "staticTemplate": [
         "feat: Short description",
         "",
-        "Message body",
-        "",
-        "Message footer"
+        "Message body"
     ],
     "dynamicTemplate": [
-        "{type}{scope} {description}",
+        "{type} {description}",
         "",
-        "{body}",
-        "",
-        "{breaking_change}{footer}"
+        "{body}"
     ],
     "tokens": [
         {
@@ -32,6 +29,11 @@
                     "description": "添加说明文档"
                 },
                 {
+                    "label": "🎨 润色或美化",
+                    "value": "🎨",
+                    "description": "润色文本或美化代码"
+                },
+                {
                     "label": "🩹 修复简单错误",
                     "value": "🩹",
                     "description": "简单修复非关键性问题"
@@ -40,6 +42,11 @@
                     "label": "🐛 修复关键错误",
                     "value": "🐛",
                     "description": "修复关键错误"
+                },
+                {
+                    "label": "💩 初稿",
+                    "value": "💩",
+                    "description": "写的很差需要进一步修改"
                 },
                 {
                     "label": "💥 引入重大改变",
@@ -72,6 +79,11 @@
                     "description": "添加依赖"
                 },
                 {
+                    "label": "🚚 移动或重命名",
+                    "value": "🚚",
+                    "description": "移动或重命名文件文件夹"
+                },
+                {
                     "label": "🔀 合并分支",
                     "value": "🔀",
                     "description": "合并分支"
@@ -87,21 +99,17 @@
                     "description": "清理废弃代码或文本"
                 },
                 {
+                    "label": "🙈 .gitignore",
+                    "value": "🙈",
+                    "description": "添加或更新 .gitignore 文件"
+                },
+                {
                     "label": "👥 新增或更新贡献者",
                     "value": "👥",
                     "description": "新增或更新贡献者"
                 }
             ],
             "description": "Type of changes"
-        },
-        {
-            "label": "Scope",
-            "name": "scope",
-            "description": "A scope may be provided to a commit’s type, to provide additional contextual information and is contained within parenthesis, e.g., \"feat(parser): add ability to parse arrays\".",
-            "type": "text",
-            "multiline": false,
-            "prefix": "(",
-            "suffix": ")"
         },
         {
             "label": "Short description",
@@ -118,20 +126,6 @@
             "multiline": true,
             "lines": 5,
             "maxLines": 10
-        },
-        {
-            "label": "Breaking change",
-            "name": "breaking_change",
-            "type": "boolean",
-            "value": "BREAKING CHANGE: ",
-            "default": false
-        },
-        {
-            "label": "Footer",
-            "name": "footer",
-            "description": "Optional footer",
-            "type": "text",
-            "multiline": true
         }
     ]
 }
