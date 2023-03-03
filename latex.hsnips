@@ -24,7 +24,6 @@ function gen_fig(label, nfig) {
     else {
         for (var i=0; i<nfig; i++){
             results += "    \\begin{subfigure}{.${1:3}\\textwidth}\n";
-            results += "        \\centering\n";
             results += "        \\includegraphics[width=\\textwidth]{./img${" + (order).toString() + "}}\n";
             results += "        \\caption{}\n";
             results += "        \\label{fig:" + label + "_" + (i+1).toString() + "}\n";
@@ -43,6 +42,9 @@ snippet bcap "bicaption" iA
 \bicaption{\quad }{\quad }
 endsnippet
 
+snippet tcg "textcolor" iA
+\textcolor{green}{${1:${VISUAL}}}$0
+endsnippet
 
 # math enverniment 
 
@@ -382,13 +384,18 @@ snippet bf "mathbf" iAm
 endsnippet
 
 # txt -> \text{}
-snippet txt "text" iAm
+snippet txt "text" iA
 \text{${1:${VISUAL}}}$0
 endsnippet
 
 # tit -> \textit{}
-snippet tit "text it" iAm
+snippet tit "text it" iA
 \textit{${1:${VISUAL}}}$0
+endsnippet
+
+# tbf -> \textbf{}
+snippet tbf "text bf" iA
+\textbf{${1:${VISUAL}}}$0
 endsnippet
 
 # sin -> \sin
