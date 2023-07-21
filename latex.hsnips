@@ -4,385 +4,180 @@ function gen_matrix(nrow, ncol, index) {
     let order = 1;
     for (var i=0; i<nrow; i++){
         results += '    ';
-        for(var j = 0;j <ncol;j++){
-            results += "$" +(order ).toString() + ((j == ncol -1) ?  " \\\\\\" : " & ");
+        for(var j = 0; j < ncol; j++){
+            results += "\$" +(order ).toString() + ((j == ncol -1) ?  " \\\\\\" : " & ");
             order ++;
         }
+        if (i == nrow-1) 
+            results = results.slice(0, -4);
         results += index ? "\n" : "";
     }
     return results;
 }
-
+function gen_vector(m) {
+    let results = "";
+    let order = 1;
+    for (var i=0; i<m-1; i++){
+        results += "$" + (order).toString() + " & ";
+        order ++;
+    }
+    results += "$" + (order).toString();
+    return results;
+}
 function gen_fig(label, nfig) {
-    let results = "\n";
+    let results = "";
     results += "\\begin{figure}[htb!]\n";
     results += "    \\centering\n";
     let order = 2;
     if (nfig == 1) {
         results += "    \\includegraphics[width=.${1:4}\\textwidth]{./img${2}}\n";
+        order ++;
     } 
     else {
         for (var i=0; i<nfig; i++){
             results += "    \\begin{subfigure}{.${1:3}\\textwidth}\n";
             results += "        \\includegraphics[width=\\textwidth]{./img${" + (order).toString() + "}}\n";
             results += "        \\caption{}\n";
-            results += "        \\label{fig:" + label + "_" + (i+1).toString() + "}\n";
+            results += "        \\label{fig." + label + "_" + (i+1).toString() + "}\n";
             results += "    \\end{subfigure}\n";
             order ++;
         }
     }
     results += "    \\caption{${" + (order).toString() + "}}\n";
-    results += "    \\label{fig:" + label + "}\n";
-    results += "\\end{figure}\n";
+    results += "    \\label{fig." + label + "}\n";
+    results += "\\end{figure}";
     return results;
 }
-endglobal
-
-snippet bcap "bicaption" iA
-\bicaption{\quad }{\quad }
-endsnippet
-
-snippet tcg "textcolor" iA
-\textcolor{green}{${1:${VISUAL}}}$0
-endsnippet
-
-# math enverniment 
-
-# Greek letters
-snippet @a "alpha" imA
-\alpha
-endsnippet
-
-snippet @A "alpha" imA
-\alpha
-endsnippet
-
-snippet @b "beta" imA
-\beta
-endsnippet
-
-snippet @B "beta" imA
-\beta
-endsnippet
-
-snippet @c "chi" imA
-\chi
-endsnippet
-
-snippet @C "chi" imA
-\chi
-endsnippet
-
-snippet @g "gamma" imA
-\gamma
-endsnippet
-
-snippet @G "Gamma" imA
-\Gamma
-endsnippet
-
-snippet @d "delta" imA
-\delta
-endsnippet
-
-snippet @D "Delta" imA
-\Delta
-endsnippet
-
-snippet @e "epsilon" imA
-\epsilon
-endsnippet
-
-snippet @E "epsilon" imA
-\epsilon
-endsnippet
-
-snippet :e "varepsilon" imA
-\varepsilon
-endsnippet
-
-snippet :E "varepsilon" imA
-\varepsilon
-endsnippet
-
-snippet @z "zeta" imA
-\zeta
-endsnippet
-
-snippet @Z "zeta" imA
-\zeta
-endsnippet
-
-snippet @t "theta" imA
-\theta
-endsnippet
-
-snippet @T "Theta" imA
-\Theta
-endsnippet
-
-snippet :t "tau" imA
-\tau
-endsnippet
-
-snippet @k "kappa" imA
-\kappa
-endsnippet
-
-snippet @K "kappa" imA
-\kappa
-endsnippet
-
-snippet @l "lambda" imA
-\lambda
-endsnippet
-
-snippet @L "Lambda" imA
-\Lambda
-endsnippet
-
-snippet @m "mu" imA
-\mu
-endsnippet
-
-snippet @M "mu" imA
-\mu
-endsnippet
-
-snippet @r "rho" imA
-\rho
-endsnippet
-
-snippet @R "rho" imA
-\rho
-endsnippet
-
-snippet @s "sigma" imA
-\sigma
-endsnippet
-
-snippet @S "Sigma" imA
-\Sigma
-endsnippet
-
-snippet @o "omega" imA
-\omega
-endsnippet
-
-snippet @O "Omega" imA
-\Omega
-endsnippet
-
-snippet $ "inline math" iA
-$${VISUAL}$0$
-endsnippet
-
-priority 10
-snippet \[ "bracket" iAm
-\\[ ${1:${VISUAL}} \\]$0
-endsnippet
-
-priority 10
-snippet \( "bracket" iAm
-\\( ${1:${VISUAL}} \\)$0
-endsnippet
-
-priority 10
-snippet \{ "bracket" iAm
-\\{ ${1:${VISUAL}} \\}$0
-endsnippet
-
-priority 10
-snippet @| "left| right|" iAm
-\left| ${1:${VISUAL}} \right|$0
-endsnippet
-
-priority 10
-snippet @{ "\left\{ \right\}" iAm
-\left\\{ ${1:${VISUAL}} \right\\}$0
-endsnippet
-
-priority 10000
-snippet ` bl ` "left\{ right." iAm
-\left\\{ ${1:${VISUAL}} \right.$0
-endsnippet
-
-priority 10
-snippet ` br ` "left. right\}" iAm
-\left. ${1:${VISUAL}} \right\\}$0
-endsnippet
-
-snippet @[ "left[ right]" iAm
-\left[ ${1:${VISUAL}} \right]$0
-endsnippet
-
-snippet @( "left( right)" iAm
-\left( ${1:${VISUAL}} \right)$0
-endsnippet
-
-snippet @< "leftangle rightangle" iAm
-\left< ${1:${VISUAL}} \right>$0
-endsnippet
-
-# RR -> \mathbb{R}
-snippet `RR|CC|ZZ` "sets" iA
-\\mathbb{``rv=m[0].charAt(0)``}
-endsnippet
-
-# bmat m n -> a matrix with the size of m*n
-snippet `(bm|pm|m|vm)at ([0-9]+) ([0-9]+) ` "matrix" bA
-\begin{``rv = m[1]``atrix}``
-    rv = gen_matrix(m[2],m[3],1);
-``\end{``rv = m[1]``atrix}$0
-endsnippet
-
-# fig label n -> figure enverniment with n subfigures, and the labels are specified by label
-snippet `fig (\S+) ([0-9]+) ` "figure" bA
-``rv = gen_fig(m[1], m[2])``$0
-endsnippet
-
-# spl -> the split enverniment with the selected text
-snippet spl "split" Am
-\begin{split}
-    ${VISUAL}$0
-\end{split}
-endsnippet
-
-# ali -> the aligned enverniment the selected text
-snippet ali "aligned" Am
-\begin{aligned}
-    ${VISUAL}$0
-\end{aligned}
-endsnippet
-
-# fr -> fractor enverniment with the selected text
-snippet fr "frac" Am
-\frac{${1:${VISUAL}}}{$2}$0
-endsnippet
-
-
-# {x}/ -> \frac{x}{}
-snippet `\{.+\}/` "fraction" Am
-``
-let str = m[0];
-str = str.slice(0, -1);
-let lastIndex = str.length - 1;
-
-let depth = 0;
-let i = str.length - 1;
-
-while (true) {
-    if (str[i] == '}') depth += 1;
-    if (str[i] == '{') depth -= 1;
-    if (depth == 0) break;
-    i -= 1;
+function gen_img(nfig) {
+    let results = "<div align=center>\n";
+    if (nfig == 1) {
+        results += "    <img width=50% style=margin:2% src=\"assets${1}\">\n";
+    } 
+    else {
+        let order = 1;
+        for (var i=0; i<nfig; i++){
+            results += "    <img width=30% style=margin:2% src=\"assets${" + (order).toString() + "}\">\n";
+            order ++;
+        }
+    }
+    results += "</div>\n";
+    return results;
+}
+function gen_columns(m) {
+    if (m == 1) return "";
+    let results = "\\begin{columns}[c]\n";
+    let order = 2;
+    for (var i=0; i<m; i++){
+        results += "    \\begin{column}{.${1:45}\\textwidth}\n";
+        results += "        ${" + (order).toString() + "}\n";
+        results += "    \\end{column}\n";
+        order ++;
+    }
+    results += "\\end{columns}";
+    return results;
 }
 
-let results = str.slice(0, i) + "\\frac{" + str.slice(i+1, -1) + "}";
-results += "{$1}$0";
-rv = results;
-``
+############################# tmp #############################
+# txc -> textcolor
+snippet txc "textcolor" iA
+\textcolor{c}{
+    ${1:${VISUAL}}
+}$0
 endsnippet
 
-# => -> \Rightarrow
-snippet `->` "implies" Am
-\Rightarrow
+############################# tikz ############################
+
+snippet `^( *)tikz` "theorem" bA
+``rv = m[1]``\begin{tikzpicture}
+``rv = m[1]``    $1
+``rv = m[1]``\end{tikzpicture}$0
 endsnippet
 
-# =< -> \Leftarrow
-snippet `<-` "implied by" Am
-\Leftarrow
+snippet `scatter\(([^,]+), ([^,]+)\) ` "scatter" bA
+\addplot[
+    only marks,
+    mark=*,
+    mark size=1.5,
+    mark options={draw=``rv=m[2]``,fill=``rv=m[2]``!80},
+] table[x=x, y=y, col sep=comma] {``rv=m[1]``};
 endsnippet
 
-# <= -> \leq
-snippet `<=` "leq" Am
-\leq
+snippet `plot\(([^,]+), ([^,]+)\) ` "plot line" bA
+\addplot[
+    ``rv=m[2]``,
+    thick,
+] table[x=x, y=y, col sep=comma] {``rv=m[1]``};
 endsnippet
 
-# >= -> \geq
-snippet `>=` "geq" Am
-\geq
+snippet `scatter3\(([^,]+), ([^,]+)\) ` "scatter" bA
+\addplot[
+    only marks,
+    mark=*,
+    mark size=1.5,
+    mark options={draw=``rv=m[2]``,fill=``rv=m[2]``!80},
+] table[x=x, y=y, z=z, col sep=comma] {``rv=m[1]``};
 endsnippet
 
-# != -> \neq
-snippet `!=` "neq" Am
-\neq
+snippet `plot3\(([^,]+), ([^,]+)\) ` "plot line" bA
+\addplot[
+    ``rv=m[2]``,
+    thick,
+] table[x=x, y=y, z=z, col sep=comma] {``rv=m[1]``};
 endsnippet
 
-snippet `~=` "approx: Am
-\approx
+snippet `axis2 ` "pgfaxis" bA
+\begin{axis}[
+        xlabel=$ x $, ylabel=$ y $,
+        xmin=-3.5, xmax=3.5,
+        ymin=-2.5, ymax=2.5,
+        grid, axis equal image,
+        legend cell align=left,
+        legend style={
+                at={(axis cs:3.5,2.5)},
+                anchor=north east,
+                font=\tiny,
+                draw=none,
+                fill=none
+            }
+    ]
+    $0
+\end{axis}
 endsnippet
 
-# ... -> \cdots
-snippet ... "dots" Am
-\dots
+snippet `axis3 ` "pgfaxis" bA
+\begin{axis}[
+        xlabel=$ x $, ylabel=$ y $, zlabel=$ z $,
+        xmin=-3.5, xmax=3.5,
+        ymin=-2.5, ymax=2.5,
+        zmin=-2.5, zmax=2.5,
+        grid, axis equal image,
+    ]
+    $0
+\end{axis}
 endsnippet
 
-snippet *** "cdots" Am
-\cdots
+############################# beamer #############################
+#snippet only "beamer only" iA
+#\only<${1:1}>{
+#    ${2:${VISUAL}}
+#}$0
+#endsnippet
+
+snippet ani "animategraphics" bA
+\animategraphics[width=\textwidth,autoplay,loop,palindrome]{${1:12}}{./img${2}}{${3:0}}{${4:10}}
 endsnippet
 
-snippet ;;; "vdots" Am
-\vdots
+snippet `col ([0-9]+) ` "columns" bA
+``rv = gen_columns(m[1])``$0
 endsnippet
 
-snippet ::: "ddots" Am
-\ddots
+# frame abc  -> \begin{frame}
+snippet `frame (\S+) ([0-9]+) ` "label" A
+\begin{frame}{``rv = m[1]``}
+``rv = gen_columns(m[2])``$0
+\end{frame}
 endsnippet
-
-# inf -> \infty
-snippet inf "\infty" iAm
-\infty 
-endsnippet
-
-# lab abc  -> \label{abc}
-snippet `lab (\S+) ` "label" Am
-\label{``rv = m[1]``} 
-endsnippet
-
-# 10^x+y -> 10^{x+y}
-# snippet `\^([^\{]\S*) ` "superscript" Am
-# ^{``rv = m[1]``}
-# endsnippet
-
-snippet ^ "superscript" iAm
-^{${1}}$0
-endsnippet
-
-snippet _ "subscript" iAm
-_{${1}}$0
-endsnippet
-
-# 10_x+y -> 10_{x+y}
-snippet `_([^\{]\S*) ` "subscript" Am
-_{``rv = m[1]``}
-endsnippet
-
-# \mathbf{A}^T -> \mathbf{A}^{\mathbrm T}
-snippet `\^\{T` "transpose" iAm
-^{\mathrm{T}
-endsnippet
-
-# \mathbf{A}^H -> \mathbf{A}^{\mathbrm H}
-snippet `\^\{H` "hermitian" iAm
-^{\mathrm{H}
-endsnippet
-
-# cal -> \mathcal{}
-snippet cal "mathcal" iAm
-\mathcal{${1:${VISUAL}}}$0
-endsnippet
-
-# bb -> \mathbb{}
-snippet bb "mathbb" iAm
-\mathbb{${1:${VISUAL}}}$0
-endsnippet
-
-# bf -> \mathbf{}
-snippet bf "mathbf" iAm
-\mathbf{${1:${VISUAL}}}$0
-endsnippet
-
+############################# latex enverniments #############################
 # txt -> \text{}
 snippet txt "text" iA
 \text{${1:${VISUAL}}}$0
@@ -394,69 +189,36 @@ snippet tit "text it" iA
 endsnippet
 
 # tbf -> \textbf{}
-snippet tbf "text bf" iA
+priority 10
+snippet tbf "textbf" iA
 \textbf{${1:${VISUAL}}}$0
 endsnippet
 
-# sin -> \sin
-snippet `(?<!arc)(?<!\\)(sin|cos|tan|csc|sec|cot|ln|log|lg|det|ker|max|min)` "function" iAm
-\``rv=m[1]+' '``
+# lemma
+snippet `^( *)lemma` "lemma" bA
+``rv = m[1]``\begin{lemma}
+``rv = m[1]``    $1
+``rv = m[1]``\end{lemma}$0
 endsnippet
 
-snippet `\\sin c` "function" iAm
-\text{sinc}
+# theorem
+snippet `^( *)thm` "theorem" bA
+``rv = m[1]``\begin{theorem}
+``rv = m[1]``    $1
+``rv = m[1]``\end{theorem}$0
 endsnippet
 
-snippet `(?<=\\(sin|cos|tan|csc|sec|cot))( )h` "function" iAm
-``rv='h '``
+snippet `^( *)def` "theorem" bA
+``rv = m[1]``\begin{definition}
+``rv = m[1]``    $1
+``rv = m[1]``\end{definition}$0
 endsnippet
 
-# in -> \in
-snippet ` (in|notin|subset|subseteq|supset|supseteq) ` "sets operator" wAm
- \``rv = m[1]`` 
+snippet \\ "inline Math" iA
+\\( ${1:${VISUAL}} \\)$0
 endsnippet
 
-# cap -> \cap
-snippet ` (circ|cap|cup|land|lor|lnot|oplus|ominus|times|otimes|sqcap|sqcup|vdash|models) ` "logic operator" wAm
- \``rv = m[1]`` 
-endsnippet
-
-snippet empty "empty set" Am
-\varnothing 
-endsnippet
-
-# ==== Auto Capture Hat Operation ====
-
-# Ahbar -> \overline{A}
-snippet `(\\?[a-zA-Z]\w*({?\w*})?)(bar|BAR)` "Bar" iAm
-\overline{``rv = m[1]``}
-endsnippet
-
-snippet `(\\?[a-zA-Z]\w*({?\w*})?)(htd|TD)` "tilde" iAm
-\tilde{``rv = m[1]``}
-endsnippet
-
-snippet `(\\?[a-zA-Z]\w*({?\w*})?)(hat|HAT)` "hat" iAm
-\hat{``rv = m[1]``}
-endsnippet
-
-snippet `(\\?[a-zA-Z]\w*({?\w*})?)(hvec)` "Vector postfix" iAm
-\vec{``rv = m[1]``}
-endsnippet
-
-snippet `(\\?[a-zA-Z]\w*({?\w*})?)(rta)` "Vector postfix" iAm
-\overrightarrow{``rv = m[1]``}
-endsnippet
-
-snippet `(\\?[a-zA-Z]\w*({?\w*})?)(hdot)` "dot" iAm
-\dot{``rv = m[1]``}
-endsnippet
-
-snippet `(\\?[a-zA-Z]\w*({?\w*})?)(hddot)` "ddot" iAm
-\ddot{``rv = m[1]``}
-endsnippet
-
-snippet `^( *)lm` "inline Math" bA
+snippet `^( *)\\\[` "inline Math" bA
 ``rv = m[1]``\[
 ``rv = m[1]``    ${VISUAL}$0
 ``rv = m[1]``\]
@@ -480,50 +242,403 @@ snippet `^( *)minipage` "minipage" bA
 ``rv = m[1]``\end{minipage}
 endsnippet
 
-priority 100
-snippet `(\\?[a-zA-Z0-9]\w*({?\w*})?)(bf|BF)` "mathbf" iAm
-\mathbf{``rv = m[1]``}
+# lab abc  -> \label{abc}
+snippet `lab (\S+) ` "label" A
+\label{``rv = m[1]``}
 endsnippet
 
-priority 100
-snippet `(\\?[a-zA-Z0-9]\w*({?\w*})?)(bm|BM)` "mathbm" iAm
-\bm{``rv = m[1]``}
+# bmat m n -> a matrix with the size of m*n
+snippet `(bm|pm|m|vm)at ([0-9]+) ([0-9]+) ` "matrix" bA
+\begin{``rv = m[1]``atrix}``
+    rv = gen_matrix(m[2],m[3],1);
+``\end{``rv = m[1]``atrix}$0
 endsnippet
 
-priority 100
-snippet `(\\?[a-zA-Z]\w*({?\w*})?)bb` iAm
-\mathbb{``rv = m[1]``}$0
+# vec m -> a vector with the size of 1*m
+snippet `vec ([0-9]+) ` "matrix" bA
+\begin{bmatrix} ``rv = gen_vector(m[1])`` \end{bmatrix}$0
 endsnippet
 
-priority 100
-snippet `(\\?[a-zA-Z]\w*({?\w*})?)cal` "mathcal" iAm
-\mathcal{``rv = m[1].toUpperCase()``}$0
+# fig label n -> figure enverniment with n subfigures, and the labels are specified by label
+snippet `fig (\S+) ([0-9]+) ` "figure" bA
+``rv = gen_fig(m[1], m[2])``$0
 endsnippet
 
-priority 100
-snippet `(\\?[a-zA-Z]\w*({?\w*})?)(frak)` "mathfrak" iAm
-\mathfrak{``rv = m[1]``}
-endsnippet
-
-priority 100
-snippet `(?<!\\)\b([a-zA-Z]+)rm` "mathrm" iAm
-\mathrm{``rv = m[1]``}
-endsnippet
-
-# latex enverniment 
-
-priority 100
 snippet `ref (\S+) ` "reference" A
 \cref{``rv = m[1]``}
 endsnippet
 
-priority 100
 snippet `cite (\S+) ` "cite" A
 \cite{``rv = m[1]``}
 endsnippet
 
-priority 100
-snippet `(chapter|section|subsection|subsubsection) (\S+) ` "paragraph" bA
+snippet `(chapter|section|subsection|subsubsection) (\S+) ` "paragraph" bwA
 \\``rv = m[1]``{``rv = m[2]``}
 $0
+endsnippet
+
+############################# Math #############################
+############################# Greek letters
+snippet @a "alpha" iAm
+\alpha
+endsnippet
+
+snippet @A "alpha" iAm
+\alpha
+endsnippet
+
+snippet @b "beta" iAm
+\beta
+endsnippet
+
+snippet @B "beta" iAm
+\beta
+endsnippet
+
+snippet @c "chi" iAm
+\chi
+endsnippet
+
+snippet @C "chi" iAm
+\chi
+endsnippet
+
+snippet @p "pi" iAm
+\pi
+endsnippet
+
+snippet :p "partial" iAm
+\partial
+endsnippet
+
+snippet @P "Pi" iAm
+\Pi
+endsnippet
+
+snippet @g "gamma" iAm
+\gamma
+endsnippet
+
+snippet @G "Gamma" iAm
+\Gamma
+endsnippet
+
+snippet @d "delta" iAm
+\delta
+endsnippet
+
+snippet @D "Delta" iAm
+\Delta
+endsnippet
+
+snippet @e "epsilon" iAm
+\epsilon
+endsnippet
+
+snippet @E "epsilon" iAm
+\epsilon
+endsnippet
+
+snippet :e "varepsilon" iAm
+\varepsilon
+endsnippet
+
+snippet :E "varepsilon" iAm
+\varepsilon
+endsnippet
+
+snippet @n "nabla" iAm
+\nabla
+endsnippet
+
+snippet @z "zeta" iAm
+\zeta
+endsnippet
+
+snippet @Z "zeta" iAm
+\zeta
+endsnippet
+
+snippet @t "theta" iAm
+\theta
+endsnippet
+
+snippet @T "Theta" iAm
+\Theta
+endsnippet
+
+snippet :t "tau" iAm
+\tau
+endsnippet
+
+snippet @k "kappa" iAm
+\kappa
+endsnippet
+
+snippet @K "kappa" iAm
+\kappa
+endsnippet
+
+snippet @l "lambda" iAm
+\lambda
+endsnippet
+
+snippet @L "Lambda" iAm
+\Lambda
+endsnippet
+
+snippet @m "mu" iAm
+\mu
+endsnippet
+
+snippet @M "mu" iAm
+\mu
+endsnippet
+
+snippet @r "rho" iAm
+\rho
+endsnippet
+
+snippet @R "rho" iAm
+\rho
+endsnippet
+
+snippet @s "sigma" iAm
+\sigma
+endsnippet
+
+snippet @S "Sigma" iAm
+\Sigma
+endsnippet
+
+snippet @o "omega" iAm
+\omega
+endsnippet
+
+snippet @O "Omega" iAm
+\Omega
+endsnippet
+
+snippet \{ "bracket" iAm
+\\{ ${1:${VISUAL}} \\}$0
+endsnippet
+
+snippet @| "left| right|" iAm
+\left| ${1:${VISUAL}} \right|$0
+endsnippet
+
+snippet :| "left\| right\|" iAm
+\left\| ${1:${VISUAL}} \right\|$0
+endsnippet
+
+snippet @} "\left\{ \right\}" iAm
+\left\\{ ${1:${VISUAL}} \right\\}$0
+endsnippet
+
+snippet ` bl `  "left\{ right." iAm
+\left\\{ ${1:${VISUAL}} \right.$0
+endsnippet
+
+snippet ` br ` "left. right\}" iAm
+\left. ${1:${VISUAL}} \right\\}$0
+endsnippet
+
+snippet @] "left[ right]" iAm
+\left[ ${1:${VISUAL}} \right]$0
+endsnippet
+
+snippet @) "left( right)" iAm
+\left( ${1:${VISUAL}} \right)$0
+endsnippet
+
+snippet @> "leftangle rightangle" iAm
+\left< ${1:${VISUAL}} \right>$0
+endsnippet
+############################# math symbols
+# RR -> \mathbb{R}
+snippet `RR` "sets" iwAm
+\\mathbb{``rv=m[0].charAt(0)``}
+endsnippet
+# => -> \Rightarrow
+snippet `->` "implies" iAm
+\rightarrow
+endsnippet
+# =< -> \Leftarrow
+snippet `<-` "implied by" iAm
+\leftarrow
+endsnippet
+# <= -> \leq
+snippet `<=` "leq" iAm
+\leq
+endsnippet
+# >= -> \geq
+snippet `>=` "geq" iAm
+\geq
+endsnippet
+# != -> \neq
+snippet `!=` "neq" iAm
+\neq
+endsnippet
+
+snippet `~=` "approx: iAm
+\approx
+endsnippet
+# ... -> \cdots
+snippet ... "dots" iAm
+\dots
+endsnippet
+
+snippet *** "cdots" iAm
+\cdots
+endsnippet
+
+snippet ;;; "vdots" iAm
+\vdots
+endsnippet
+
+snippet ::: "ddots" iAm
+\ddots
+endsnippet
+# inf -> \infty
+snippet inf "\infty" iAm
+\infty 
+endsnippet
+############################# math functions
+priority 200
+snippet norm "norm" iAm
+\left\| ${1:${VISUAL}} \right\|$0
+endsnippet
+
+snippet ^ "superscript" iAm
+^{${1}}$0
+endsnippet
+
+snippet _ "subscript" iAm
+_{${1}}$0
+endsnippet
+# spl -> the split enverniment with the selected text
+snippet spl "split" Am
+\begin{split}
+    ${VISUAL}$0
+\end{split}
+endsnippet
+# ali -> the aligned enverniment the selected text
+snippet ali "aligned" Am
+\begin{aligned}
+    ${VISUAL}$0
+\end{aligned}
+endsnippet
+# case -> the cases enverniment the selected text
+snippet case "cases" Am
+\begin{cases}
+    ${VISUAL}$0
+\end{cases}
+endsnippet
+# fr -> fractor enverniment with the selected text
+snippet // "frac" iAm
+\frac{${1:${VISUAL}}}{$2}$0
+endsnippet
+# \mathbf{A}^T -> \mathbf{A}^{\mathbrm T}
+snippet `\^\{T` "transpose" iAm
+^{\mathrm{T}
+endsnippet
+# \mathbf{A}^H -> \mathbf{A}^{\mathbrm H}
+snippet `\^\{H` "hermitian" iAm
+^{\mathrm{H}
+endsnippet
+# ||x||_F -> ||x||_{\mathrm F}
+snippet `\_\{F` "frobenius" iAm
+_{\mathrm{F}
+endsnippet
+
+snippet `(\\?[a-zA-Z0-9]\w*({?\w*})?)(bf|BF)` "mathbf" iAm
+\mathbf{``rv = m[1]``}
+endsnippet
+
+snippet `(\\?[a-zA-Z0-9]\w*({?\w*})?)(bm|BM)` "mathbm" iAm
+\bm{``rv = m[1]``}
+endsnippet
+
+# priority 100
+snippet `(\\?[a-zA-Z]\w*({?\w*})?)bb` iAm
+\mathbb{``rv = m[1]``}$0
+endsnippet
+
+# priority 100
+snippet `(\\?[a-zA-Z]\w*({?\w*})?)cal` "mathcal" iAm
+\mathcal{``rv = m[1].toUpperCase()``}$0
+endsnippet
+
+# priority 100
+snippet `(\\?[a-zA-Z]\w*({?\w*})?)(frak)` "mathfrak" iAm
+\mathfrak{``rv = m[1]``}
+endsnippet
+
+# priority 100
+snippet `(?<!\\)\b([a-zA-Z]+)rm` "mathrm" iAm
+\mathrm{``rv = m[1]``}
+endsnippet
+
+snippet `(?<!arc)(?<!\\)(sin|cos|tan|csc|sec|cot|ln|log|lg|det|ker|max|min)` "function" iAm
+\``rv=m[1]+' '``
+endsnippet
+
+snippet `(?<=\\(sin|cos|tan|csc|sec|cot))( )h` "function" iAm
+``rv='h '``
+endsnippet
+# in -> \in
+snippet ` (in|notin|subset|subseteq|supset|supseteq) ` "sets operator" wAm
+ \``rv = m[1]`` 
+endsnippet
+# cap -> \cap
+snippet ` (circ|cap|cup|land|lor|lnot|oplus|ominus|times|otimes|sqcap|sqcup|vdash|models) ` "logic operator" wAm
+ \``rv = m[1]`` 
+endsnippet
+
+snippet empty "empty set" Am
+\varnothing 
+endsnippet
+
+snippet `(\\?[a-zA-Z0-9]\w*({?\w*})?)op` "operatorname" iAm
+\operatorname{``rv = m[1]``}
+endsnippet
+
+snippet `([0-9]+)d` "degrees" iAm
+``rv = m[1]``^{\circ}$0
+endsnippet
+
+snippet `sqrt` "sqrt" iAm
+\sqrt{${1:${VISUAL}}}$0
+endsnippet
+
+snippet `sum` "sqrt" iAm
+\sum
+endsnippet
+############################# hat operations
+snippet `(\\?[a-zA-Z]\w*({?\w*})?)(bar|BAR)` "Bar" iAm
+\overline{``rv = m[1]``}
+endsnippet
+
+snippet `(\\?[a-zA-Z]\w*({?\w*})?)(td|TD)` "tilde" iAm
+\tilde{``rv = m[1]``}
+endsnippet
+
+snippet `(\\?[a-zA-Z]\w*({?\w*})?)(hat|HAT)` "hat" iAm
+\hat{``rv = m[1]``}
+endsnippet
+
+snippet `(\\?[a-zA-Z]\w*({?\w*})?)(hvec)` "Vector postfix" iAm
+\vec{``rv = m[1]``}
+endsnippet
+
+snippet `(\\?[a-zA-Z]\w*({?\w*})?)(rta)` "Vector postfix" iAm
+\overrightarrow{``rv = m[1]``}
+endsnippet
+
+snippet `(\\?[a-zA-Z]\w*({?\w*})?)(hdot)` "dot" iAm
+\dot{``rv = m[1]``}
+endsnippet
+
+snippet `(\\?[a-zA-Z]\w*({?\w*})?)(hddot)` "ddot" iAm
+\ddot{``rv = m[1]``}
 endsnippet
