@@ -77,6 +77,8 @@ function gen_columns(m) {
     return results;
 }
 
+endglobal
+
 ############################# tmp #############################
 # txc -> textcolor
 snippet txc "textcolor" iA
