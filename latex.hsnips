@@ -216,7 +216,7 @@ snippet `^( *)def` "theorem" bA
 ``rv = m[1]``\end{definition}$0
 endsnippet
 
-snippet \\ "inline Math" iA
+snippet == "inline Math" iA
 \\( ${1:${VISUAL}} \\)$0
 endsnippet
 
