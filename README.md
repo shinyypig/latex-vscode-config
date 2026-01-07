@@ -1,134 +1,136 @@
-# 在 VSCode 中配置 LaTeX 环境
+# Configure LaTeX in VSCode
 
-本教程将介绍如何在 VSCode 中配置 LaTeX 环境，以便于在 VSCode 中进行 LaTeX 的编写和预览，打造一个舒适便捷的 LaTeX 编写环境。
+English | [中文](README.zh.md)
 
-支持的功能有：
+This guide shows how to set up a LaTeX environment in VSCode for editing and previewing, so you can work efficiently and comfortably.
 
--   保存文件时自动编译
--   支持 XeLaTeX 和 PdfLaTeX 编译 (中英文)
--   编译结果输出到特定文件夹./tmp
--   英文单词补全，以及中文翻译
--   LaTeX 语法自动补全
--   支持快速输入公式，比如输入`@a`会自动补全为`\alpha`
--   自动补全路径
--   自动生成矩阵和图片环境
--   实时预览公式、图片
--   自动格式化 tex 文件
+Supported features:
 
-完整配置后的效果如下：
+-   Auto compile on save
+-   XeLaTeX and PdfLaTeX support (Chinese and English)
+-   Output to a dedicated folder `./tmp`
+-   English word completion with Chinese translations
+-   LaTeX syntax completion
+-   Fast math snippets (e.g. `@a` expands to `\alpha`)
+-   Path auto-completion
+-   Auto-generate matrix and figure environments
+-   Live preview for equations and images
+-   Auto-format `.tex` files
+
+Example result after a full setup:
 
 ![Alt text](img/iShot_2023-02-13_12.26.45.gif)
 
-配置部分主要包含以下内容：
+The configuration includes:
 
--   [软件安装](#软件安装)
-    -   [TeX Live 安装](#tex-live-安装)
-    -   [VSCode 安装](#vscode-安装)
--   [VSCode 插件](#vscode-插件)
-    -   [如何安装](#如何安装)
-    -   [插件推荐](#插件推荐)
--   [LaTeX Workshop 配置](#latex-workshop-配置)
-    -   [基本配置](#基本配置)
-    -   [编译工具链配置](#编译工具链配置)
--   [进阶配置](#进阶配置)
-    -   [使用 latexindent 格式化 LaTeX 代码](#使用-latexindent-格式化-latex-代码)
-    -   [使用 HyperSnips for Math 插件快速输入公式](#使用-hypersnips-for-math-插件快速输入公式)
-    -   [使用 Git 进行版本管理](#使用-git-进行版本管理)
-    -   [TiKZ Externalize 加速编译](#tikz-externalize-加速编译)
+- [Software installation](#software-installation)
+  - [Install TeX Live](#install-tex-live)
+  - [Install VSCode](#install-vscode)
+- [VSCode extensions](#vscode-extensions)
+  - [How to install](#how-to-install)
+  - [Recommended extensions](#recommended-extensions)
+- [LaTeX Workshop configuration](#latex-workshop-configuration)
+  - [Basic settings](#basic-settings)
+  - [Compile toolchain](#compile-toolchain)
+- [Advanced configuration](#advanced-configuration)
+  - [Format LaTeX with latexindent](#format-latex-with-latexindent)
+  - [Fast math input with HyperSnips for Math](#fast-math-input-with-hypersnips-for-math)
+  - [Version control with Git](#version-control-with-git)
+  - [Speed up with TikZ externalize](#speed-up-with-tikz-externalize)
 
-## 软件安装
+## Software installation
 
-### TeX Live 安装
+### Install TeX Live
 
-TeX Live 是一个 LaTeX 发行版，并且包含较为完整的 LaTeX 环境，推荐使用 TeX Live 进行 LaTeX 的编译。如果之前安装过 MikTeX，一定要将其完全卸载后，再安装 TeX Live。
+TeX Live is a full LaTeX distribution and is recommended for compiling LaTeX documents. If you previously installed MikTeX, uninstall it completely before installing TeX Live.
 
-Windows / Linux 用户可以直接下载安装包进行安装，安装包下载地址为：[texlive.iso](https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/)，下载 texlive.iso 文件，双击安装即可。
+Windows / Linux users can download the installer here: [texlive.iso](https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/). Download the ISO and run the installer.
 
-Mac 用户下载 Mac 版本的发行包，安装包下载地址为：[MacTeX.pkg](https://mirrors.tuna.tsinghua.edu.cn/ctan/systems/mac/mactex/)，下载 MacTeX.pkg 文件，双击安装即可。
+Mac users can download: [MacTeX.pkg](https://mirrors.tuna.tsinghua.edu.cn/ctan/systems/mac/mactex/). Download the pkg and run it.
 
-### VSCode 安装
+### Install VSCode
 
-VSCode 是一个轻量级的编辑器，支持多种语言的编写，包括 LaTeX。安装包下载地址为：[Visual Studio Code](https://code.visualstudio.com/download)，下载对应系统的安装包，双击安装即可。
+VSCode is a lightweight editor that supports LaTeX. Download the installer from [Visual Studio Code](https://code.visualstudio.com/download) and install it.
 
-## VSCode 插件
+## VSCode extensions
 
-### 如何安装
+### How to install
 
-点击左侧的扩展按钮
+Click the Extensions icon on the left:
 
 ![Extensions](img/iShot_2023-02-13_10.19.01.png)
 
-搜索对应的插件，点击安装即可。
+Search for the extension and click Install.
 
-### 插件推荐
+### Recommended extensions
 
-除了 LaTeX Workshop 之外，其他插件都是可选的，可以根据自己的需求进行安装。
+Everything below is optional except LaTeX Workshop.
 
 -   LaTeX Workshop
 
-    LaTeX Workshop 支持 LaTeX 的编译、预览、语法检查等功能。
+    LaTeX Workshop provides compilation, preview, and syntax checking.
 
     ![latex workshop](img/iShot_2023-02-13_10.22.55.png)
 
 -   English Word Hint
 
-    English Word Hint 是一个英语单词提示插件，可以在编写英语文档时，自动提示相关英语单词，并显示对应的中文翻译，提高英文文档编写效率。
+    English Word Hint suggests English words and shows Chinese translations to improve English writing efficiency.
 
     ![English word hint](img/iShot_2023-02-13_10.24.58.png)
 
 -   Path Auto Complete
 
-    Path Auto Complete 可以自动补全路径，方便快速插入图片。
+    Path Auto Complete inserts image paths quickly.
 
     ![Alt text](img/iShot_2023-02-13_11.57.52.png)
 
 -   indent rainbow
 
-    indent rainbow 可以为不同层级的缩进添加不同的颜色，方便阅读。
+    indent rainbow colorizes indentation levels.
 
     ![Alt text](img/iShot_2023-02-13_10.27.37.png)
 
 -   Word Count CJK
 
-    Word Count CJK 可以统计中文文档的字数。
+    Word Count CJK counts words for Chinese documents.
 
     ![Alt text](img/iShot_2023-02-13_10.29.03.png)
 
 -   Code Spell Checker
 
-    Code Spell Checker 可以检查文档中的英文单词拼写错误，轻量级插件，速度快，内存占用少。
+    Code Spell Checker checks English spelling with low memory overhead.
 
     ![Alt text](img/iShot_2023-02-13_10.31.35.png)
 
 -   LTex
 
-    LTex 是一个拼写以及语法检查插件，不仅仅可以检查拼写错误，还可以检查语法错误，功能强大，但是速度较慢，内存占用较大。与 Code Spell Checker 两者可以视配置二选一。
+    LTex checks spelling and grammar, but is slower and uses more memory. Choose either LTex or Code Spell Checker.
 
     ![Alt text](img/iShot_2023-02-13_10.31.59.png)
 
 -   Project Manager
 
-    Project Manager 可以管理多个 VSCode 项目，方便快速打开或切换项目。
+    Project Manager helps you switch between multiple VSCode projects.
 
     ![Alt text](img/iShot_2023-02-13_10.36.21.png)
 
 -   Material Icon Theme
 
-    Material Icon Theme 可以为 VSCode 左侧的文件树添加图标，方便查看。
+    Material Icon Theme adds icons to the VSCode file tree.
 
     ![Alt text](img/iShot_2023-02-13_10.38.20.png)
 
 -   WakaTime
 
-    WakaTime 可以统计编程时间，以及编程语言的使用时间，以帮助我们更好的规划学习时间。
+    WakaTime tracks coding time by language for better time planning.
 
     ![Alt text](img/iShot_2023-02-13_10.39.39.png)
 
-## LaTeX Workshop 配置
+## LaTeX Workshop configuration
 
-下面的配置是我个人的配置，可以根据自己的需求进行修改。
+The settings below are my personal configuration. Adjust as needed.
 
-### 基本配置
+### Basic settings
 
 ```json
 "latex-workshop.hover.preview.mathjax.extensions": [
@@ -144,43 +146,42 @@ VSCode 是一个轻量级的编辑器，支持多种语言的编写，包括 LaT
 "latex-workshop.view.pdf.invertMode.enabled": "auto",
 ```
 
-点击 VSCode 左下角的齿轮按钮，选择 settings （设置），进入设置界面。
-搜索对应的条目，并修改为相应的配置，其余配置默认即可。比如：
+Click the gear icon in the lower-left corner of VSCode, choose Settings, and search for each option to update it. For example:
 
 ![Alt text](img/iShot_2023-02-13_10.47.32.png)
 
-如果比较熟悉 VSCode，可以点击左下角的齿轮按钮，选择 Command Palette (命令面板)，在命令面板中搜索 settings，打开 settings.json 文件，直接复制粘贴上面的代码，从而快速修改配置。
+If you are comfortable with VSCode, open Command Palette, search for settings, open settings.json, and paste the snippet directly.
 
-配置项的具体解释如下：
+Explanation of each setting:
 
 ```text
-// 鼠标悬停，预览公式时，支持 boldsymbol 宏
+// Enable boldsymbol in hover preview
 "latex-workshop.hover.preview.mathjax.extensions": [
     "boldsymbol"
 ],
-// 是否启用 IntelliSense，自动补全引用的包中的环境和命令
+// Enable IntelliSense for package commands and environments
 "latex-workshop.intellisense.package.enabled": true,
-// 编译后的文件输出目录
+// Output directory for compiled files
 "latex-workshop.latex.outDir": "./tmp",
-// 默认编译引擎为上次使用的
+// Default recipe uses the last one you ran
 "latex-workshop.latex.recipe.default": "lastUsed",
-// 预览复杂公式，使用时需要通过 command palette (命令面板) 打开
+// Enable the math preview panel for complex formulas
 "latex-workshop.mathpreviewpanel.cursor.enabled": true,
-// 不允许弹窗显示错误信息
+// Disable error popups
 "latex-workshop.message.error.show": false,
-// 不允许弹窗显示警告信息
+// Disable warning popups
 "latex-workshop.message.warning.show": false,
-// 预览 PDF 时，反转颜色
+// Invert colors when previewing PDF
 "latex-workshop.view.pdf.invert": 1,
-// 预览 PDF 时，自动检测是否需要反转颜色
+// Auto detect when to invert PDF colors
 "latex-workshop.view.pdf.invertMode.enabled": "auto",
 ```
 
-### 编译工具链配置
+### Compile toolchain
 
-推荐使用 latexmk 进行编译，latexmk 可以自动检测文档中的变化，自动进行编译，并且同时支持多种编译引擎，包括 XeLaTeX、PdfLaTeX。
+I recommend using latexmk, which automatically detects changes and supports multiple engines such as XeLaTeX and PdfLaTeX.
 
-在 settings.json 文件中找到 latex-workshop.latex.tools 和 latex-workshop.latex.recipes 配置项，将其全部删除，并修改为如下配置：
+In settings.json, find `latex-workshop.latex.tools` and `latex-workshop.latex.recipes`, delete them, and replace with:
 
 ```json
 "latex-workshop.latex.recipes": [
@@ -227,15 +228,15 @@ VSCode 是一个轻量级的编辑器，支持多种语言的编写，包括 LaT
 ],
 ```
 
-## 进阶配置
+## Advanced configuration
 
-这一部分的配置可选，如果不需要可以跳过。
+This section is optional.
 
-### 使用 latexindent 格式化 LaTeX 代码
+### Format LaTeX with latexindent
 
-首先需要安装 latexindent.pl，具体安装方法可以参考 [latexindent.pl](https://github.com/cmhughes/latexindent.pl)。
+Install latexindent.pl first, following [latexindent.pl](https://github.com/cmhughes/latexindent.pl).
 
-修改 settings.json 文件，添加如下配置：
+Add this to settings.json:
 
 ```json
 "latex-workshop.latexindent.args": [
@@ -246,13 +247,13 @@ VSCode 是一个轻量级的编辑器，支持多种语言的编写，包括 LaT
 ],
 ```
 
-该配置的主要目的是将 latexindent.pl 的输出信息输出到 tmp/indent.log 文件中，方便统一管理。
+This sends latexindent.pl logs to `tmp/indent.log` for easier management.
 
-### 使用 HyperSnips for Math 插件快速输入公式
+### Fast math input with HyperSnips for Math
 
-首先安装 HyperSnips for Math， 然后根据插件说明进行基本配置。
+Install HyperSnips for Math and follow the extension's setup instructions.
 
-利用该插件可以快速输入公式，比如输入 `eq` 就可以自动生成
+With this extension, typing `eq` expands to:
 
 ```latex
 \begin{equation}
@@ -260,9 +261,9 @@ VSCode 是一个轻量级的编辑器，支持多种语言的编写，包括 LaT
 \end{equation}
 ```
 
-[latex.hsnips](latex.hsnips)是我的个人配置，主要支持两个功能
+[latex.hsnips](latex.hsnips) is my personal config and supports two features.
 
-输入 `bmat n m` 然后按空格键，可以自动生成对应大小的空矩阵：
+Type `bmat n m` and press Space to generate an empty matrix:
 
 ```latex
 // bmat 3 4
@@ -273,7 +274,7 @@ VSCode 是一个轻量级的编辑器，支持多种语言的编写，包括 LaT
 \end{bmatrix}
 ```
 
-输入 `fig label n` 然后按空格键，可以自动生成对应数量的图片插入代码，label 则为对应的标签：
+Type `fig label n` and press Space to generate a figure block with multiple subfigures:
 
 ```latex
 \begin{figure}[htb!]
@@ -301,33 +302,33 @@ VSCode 是一个轻量级的编辑器，支持多种语言的编写，包括 LaT
 \end{figure}
 ```
 
-其余配置可以根据自己的需求进行修改。
+Adjust other snippets as needed.
 
-### 使用 Git 进行版本管理
+### Version control with Git
 
-首先需要安装 Git：点击 VSCode 左侧的 Source Control (源代码管理) 图标，如果没有安装 Git，会提示安装，根据提示安装即可。
+Install Git first. Click the Source Control icon in VSCode. If Git is missing, VSCode will prompt you to install it.
 
 ![Alt text](img/iShot_2023-02-15_16.45.42.png)
 
-推荐安装的插件有：
+Recommended extensions:
 
 -   GitLens
 
-    GitLens 拓展了 VSCode 的源代码管理功能，可以查看每一行代码的提交记录，以及每一次提交的详细信息。但是需要 pro 会员才能解锁全部功能，建议直接在设置中关闭 pro 功能。相关功能，安装下方开源免费插件替代即可。
+    GitLens adds blame and history features. Some features require a Pro subscription, so turn them off in settings. You can also use the free alternatives below.
 
 -   Git Graph
 
-    Git Graph 可以以图形化的方式展示 Git 仓库的提交记录，方便查看。
+    Git Graph shows the commit history visually.
 
 -   Commit Message Editor
 
-    Commit Message Editor 可以格式化 commit 信息。可以导入该[配置](shinyypig_commit_config.json)，方便统一管理，效果如下。
+    Commit Message Editor formats commit messages. You can import this [config](shinyypig_commit_config.json).
 
 ![Alt text](img/iShot_2023-02-15_16.54.32.png)
 
-### TiKZ Externalize 加速编译
+### Speed up with TikZ externalize
 
-确保你的 LaTeX 的输出目录为`./tmp/`，然后在你的 tex 文件中添加如下代码：
+Make sure your output directory is `./tmp/`, then add this to your `.tex` file:
 
 ```latex
 \usetikzlibrary{external}
@@ -338,7 +339,7 @@ VSCode 是一个轻量级的编辑器，支持多种语言的编写，包括 LaT
 ]
 ```
 
-接着在文档根目录下新建`latexmkrc`文件，添加如下代码：
+Then create a `latexmkrc` file at the project root:
 
 ```perl
 $clean_ext .= ' %R.figlist %R-figure* %R.makefile fls.tmp';
@@ -394,7 +395,7 @@ sub tikzlatex {
 }
 ```
 
-最后，LaTeX Workshop 的工具配置需要修改为：
+Finally, update LaTeX Workshop tools as follows:
 
 ```json
 "latex-workshop.latex.tools": [
