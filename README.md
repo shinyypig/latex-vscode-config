@@ -1,6 +1,6 @@
 # 在 VSCode 中配置 LaTeX 环境
 
-中文 | [English](README.md)
+中文 | [English](README.en.md)
 
 本教程将介绍如何在 VSCode 中配置 LaTeX 环境，以便于在 VSCode 中进行 LaTeX 的编写和预览，打造一个舒适便捷的 LaTeX 编写环境。
 
